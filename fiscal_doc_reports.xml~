@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<report string="Ordine Cliente" model="sale.order" auto="True" name="C. e G. Reports.ordine" rml="StampeJasper/report/order.jrxml" id="ceg_report_ordine_cliente" menu="False" header="False" />
+		<report string="Fattura" model="fiscaldoc.header" auto="True" name="C. e G. Reports.fattura" rml="CeG_reports/report/Fattura.jrxml" id="ceg_report_fattura" menu="False" header="False" />
+	</data>
+</openerp>

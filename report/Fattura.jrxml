@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fattura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="214"/>
+	<style name="Righe" mode="Opaque">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="dadata" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="adata" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="danr" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="anr" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     fiscaldoc_header."agente" AS fiscaldoc_header_agente,
+     fiscaldoc_header."data_documento" AS fiscaldoc_header_data_documento,
+     fiscaldoc_header."partner_indfat_id" AS fiscaldoc_header_partner_indfat_id,
+     fiscaldoc_header."valuta" AS fiscaldoc_header_valuta,
+     fiscaldoc_header."listino_id" AS fiscaldoc_header_listino_id,
+     fiscaldoc_header."banca_patner" AS fiscaldoc_header_banca_patner,
+     fiscaldoc_header."ora_trasporto" AS fiscaldoc_header_ora_trasporto,
+     fiscaldoc_header."totale_documento" AS fiscaldoc_header_totale_documento,
+     fiscaldoc_header."numdoc" AS fiscaldoc_header_numdoc,
+     fiscaldoc_header."partner_indcons_id" AS fiscaldoc_header_partner_indcons_id,
+     fiscaldoc_header."partner_id" AS fiscaldoc_header_partner_id,
+     fiscaldoc_header."sconto_pagamento" AS fiscaldoc_header_sconto_pagamento,
+     fiscaldoc_header."company_id" AS fiscaldoc_header_company_id,
+     fiscaldoc_header."spese_imballo" AS fiscaldoc_header_spese_imballo,
+     fiscaldoc_header."spese_trasporto" AS fiscaldoc_header_spese_trasporto,
+     fiscaldoc_header."totale_peso" AS fiscaldoc_header_totale_peso,
+     fiscaldoc_header."sconto_partner" AS fiscaldoc_header_sconto_partner,
+     fiscaldoc_header."data_trasporto" AS fiscaldoc_header_data_trasporto,
+     fiscaldoc_header."magazzino_id" AS fiscaldoc_header_magazzino_id,
+     fiscaldoc_header."note_di_trasporto" AS fiscaldoc_header_note_di_trasporto,
+     fiscaldoc_header."totale_colli" AS fiscaldoc_header_totale_colli,
+     fiscaldoc_header."progr" AS fiscaldoc_header_progr,
+     fiscaldoc_header."banca_azienda" AS fiscaldoc_header_banca_azienda,
+     fiscaldoc_header."vettore" AS fiscaldoc_header_vettore,
+     fiscaldoc_header."spese_incasso" AS fiscaldoc_header_spese_incasso,
+     fiscaldoc_header."magazzino_destinazione_id" AS fiscaldoc_header_magazzino_destinazione_id,
+     fiscaldoc_header."totale_bolli" AS fiscaldoc_header_totale_bolli,
+     fiscaldoc_header."totale_netto_merce" AS fiscaldoc_header_totale_netto_merce,
+     fiscaldoc_header."pagamento_id" AS fiscaldoc_header_pagamento_id,
+     fiscaldoc_header."aspetto_esteriore_id" AS fiscaldoc_header_aspetto_esteriore_id,
+     fiscaldoc_header."totale_merce" AS fiscaldoc_header_totale_merce,
+     fiscaldoc_header."name" AS fiscaldoc_header_name,
+     fiscaldoc_header."spedizione" AS fiscaldoc_header_spedizione,
+     fiscaldoc_header."totale_imponibile" AS fiscaldoc_header_totale_imponibile,
+     fiscaldoc_header."porto_id" AS fiscaldoc_header_porto_id,
+     fiscaldoc_header."str_sconto_partner" AS fiscaldoc_header_str_sconto_partner,
+     fiscaldoc_header."tipo_doc" AS fiscaldoc_header_tipo_doc,
+     fiscaldoc_header."totale_imposta" AS fiscaldoc_header_totale_imposta,
+     fiscaldoc_header."totale_acconti" AS fiscaldoc_header_totale_acconti,
+     fiscaldoc_header."causale_del_trasporto_id" AS fiscaldoc_header_causale_del_trasporto_id,
+     fiscaldoc_righe."product_uos_qty" AS fiscaldoc_righe_product_uos_qty,
+     fiscaldoc_righe."flag_omaggi" AS fiscaldoc_righe_flag_omaggi,
+     fiscaldoc_righe."product_uom" AS fiscaldoc_righe_product_uom,
+     fiscaldoc_righe."product_uom_qty" AS fiscaldoc_righe_product_uom_qty,
+     fiscaldoc_righe."perc_provv" AS fiscaldoc_righe_perc_provv,
+     fiscaldoc_righe."contropartita" AS fiscaldoc_righe_contropartita,
+     fiscaldoc_righe."product_uos" AS fiscaldoc_righe_product_uos,
+     fiscaldoc_righe."sconti_riga" AS fiscaldoc_righe_sconti_riga,
+     fiscaldoc_righe."product_id" AS fiscaldoc_righe_product_id,
+     fiscaldoc_righe."totale_riga" AS fiscaldoc_righe_totale_riga,
+     fiscaldoc_righe."name" AS fiscaldoc_righe_name,
+     fiscaldoc_righe."discount_riga" AS fiscaldoc_righe_discount_riga,
+     fiscaldoc_righe."order_line_id" AS fiscaldoc_righe_order_line_id,
+     fiscaldoc_righe."codice_iva" AS fiscaldoc_righe_codice_iva,
+     fiscaldoc_righe."descrizione_riga" AS fiscaldoc_righe_descrizione_riga,
+     fiscaldoc_righe."product_prezzo_unitario" AS fiscaldoc_righe_product_prezzo_unitario,
+     fiscaldoc_righe."prezzo_netto" AS fiscaldoc_righe_prezzo_netto,
+     product_product."name_template" AS product_product_name_template,
+     product_product."default_code" AS product_product_default_code,
+     product_uom."name" AS product_uom_name,
+     res_partner."name" AS res_partner_name,
+     res_partner."vat" AS res_partner_vat,
+     res_partner."fiscalcode" AS res_partner_fiscalcode,
+     res_partner_address."zip" AS res_partner_address_zip,
+     res_partner_address."street" AS res_partner_address_street,
+     res_partner_address."city" AS res_partner_address_city,
+     res_partner_address."province" AS res_partner_address_province,
+     stock_picking_carriage_condition."name" AS stock_picking_carriage_condition_name,
+     stock_picking_goods_description."name" AS stock_picking_goods_description_name,
+     stock_picking_transportation_reason."name" AS stock_picking_transportation_reason_name,
+     fiscaldoc_causalidoc."tipo_documento" AS fiscaldoc_causalidoc_tipo_documento,
+     account_payment_term."name" AS account_payment_term_name,
+     account_tax."description" AS account_tax_description,
+     fiscaldoc_spedizioni."name" AS fiscaldoc_spedizioni_name
+FROM
+     "public"."fiscaldoc_header" fiscaldoc_header INNER JOIN "public"."fiscaldoc_righe" fiscaldoc_righe ON fiscaldoc_header."id" = fiscaldoc_righe."name"
+     INNER JOIN "public"."product_product" product_product ON fiscaldoc_righe."product_id" = product_product."id"
+     INNER JOIN "public"."product_uom" product_uom ON fiscaldoc_righe."product_uom" = product_uom."id"
+     LEFT OUTER JOIN "public"."account_tax" account_tax ON fiscaldoc_righe."codice_iva" = account_tax."id"
+     INNER JOIN "public"."res_partner" res_partner ON fiscaldoc_header."partner_id" = res_partner."id"
+     LEFT OUTER JOIN "public"."stock_picking_carriage_condition" stock_picking_carriage_condition ON fiscaldoc_header."porto_id" = stock_picking_carriage_condition."id"
+     LEFT OUTER JOIN "public"."stock_picking_goods_description" stock_picking_goods_description ON fiscaldoc_header."aspetto_esteriore_id" = stock_picking_goods_description."id"
+     LEFT OUTER JOIN "public"."stock_picking_transportation_reason" stock_picking_transportation_reason ON fiscaldoc_header."causale_del_trasporto_id" = stock_picking_transportation_reason."id"
+     INNER JOIN "public"."fiscaldoc_causalidoc" fiscaldoc_causalidoc ON fiscaldoc_header."tipo_doc" = fiscaldoc_causalidoc."id"
+     LEFT OUTER JOIN "public"."account_payment_term" account_payment_term ON fiscaldoc_header."pagamento_id" = account_payment_term."id"
+     INNER JOIN "public"."res_partner_address" res_partner_address ON fiscaldoc_header."partner_id" = res_partner_address."partner_id"
+     LEFT OUTER JOIN "public"."fiscaldoc_spedizioni" fiscaldoc_spedizioni ON fiscaldoc_header."spedizione" = fiscaldoc_spedizioni."id"
+ORDER BY
+     fiscaldoc_header_numdoc ASC
+WHERE
+fiscaldoc_header."name">=$P{danr} AND fiscaldoc_header."name"<=$P{anr}
+AND fiscaldoc_header."data_documento">=to_date($P{dadata},'YYYY-MM-DD')
+AND fiscaldoc_header."data_documento"<=to_date($P{adata},'YYYY-MM-DD')]]>
+	</queryString>
+	<field name="fiscaldoc_header_agente" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_data_documento" class="java.sql.Date"/>
+	<field name="fiscaldoc_header_partner_indfat_id" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_valuta" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_listino_id" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_banca_patner" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_ora_trasporto" class="java.sql.Timestamp"/>
+	<field name="fiscaldoc_header_totale_documento" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_header_numdoc" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_partner_indcons_id" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_partner_id" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_sconto_pagamento" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_header_company_id" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_spese_imballo" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_header_spese_trasporto" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_header_totale_peso" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_header_sconto_partner" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_header_data_trasporto" class="java.sql.Date"/>
+	<field name="fiscaldoc_header_magazzino_id" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_note_di_trasporto" class="java.lang.String"/>
+	<field name="fiscaldoc_header_totale_colli" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_progr" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_banca_azienda" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_vettore" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_spese_incasso" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_header_magazzino_destinazione_id" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_totale_bolli" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_header_totale_netto_merce" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_header_pagamento_id" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_aspetto_esteriore_id" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_totale_merce" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_header_name" class="java.lang.String"/>
+	<field name="fiscaldoc_header_spedizione" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_totale_imponibile" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_header_porto_id" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_str_sconto_partner" class="java.lang.String"/>
+	<field name="fiscaldoc_header_tipo_doc" class="java.lang.Integer"/>
+	<field name="fiscaldoc_header_totale_imposta" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_header_totale_acconti" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_header_causale_del_trasporto_id" class="java.lang.Integer"/>
+	<field name="fiscaldoc_righe_product_uos_qty" class="java.lang.Double"/>
+	<field name="fiscaldoc_righe_flag_omaggi" class="java.lang.String"/>
+	<field name="fiscaldoc_righe_product_uom" class="java.lang.Integer"/>
+	<field name="fiscaldoc_righe_product_uom_qty" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_righe_perc_provv" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_righe_contropartita" class="java.lang.Integer"/>
+	<field name="fiscaldoc_righe_product_uos" class="java.lang.Integer"/>
+	<field name="fiscaldoc_righe_sconti_riga" class="java.lang.String"/>
+	<field name="fiscaldoc_righe_product_id" class="java.lang.Integer"/>
+	<field name="fiscaldoc_righe_totale_riga" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_righe_name" class="java.lang.Integer"/>
+	<field name="fiscaldoc_righe_discount_riga" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_righe_order_line_id" class="java.lang.Integer"/>
+	<field name="fiscaldoc_righe_codice_iva" class="java.lang.Integer"/>
+	<field name="fiscaldoc_righe_descrizione_riga" class="java.lang.String"/>
+	<field name="fiscaldoc_righe_product_prezzo_unitario" class="java.math.BigDecimal"/>
+	<field name="fiscaldoc_righe_prezzo_netto" class="java.math.BigDecimal"/>
+	<field name="product_product_name_template" class="java.lang.String"/>
+	<field name="product_product_default_code" class="java.lang.String"/>
+	<field name="product_uom_name" class="java.lang.String"/>
+	<field name="res_partner_name" class="java.lang.String"/>
+	<field name="res_partner_vat" class="java.lang.String"/>
+	<field name="res_partner_fiscalcode" class="java.lang.String"/>
+	<field name="res_partner_address_zip" class="java.lang.String"/>
+	<field name="res_partner_address_street" class="java.lang.String"/>
+	<field name="res_partner_address_city" class="java.lang.String"/>
+	<field name="res_partner_address_province" class="java.lang.Integer"/>
+	<field name="stock_picking_carriage_condition_name" class="java.lang.String"/>
+	<field name="stock_picking_goods_description_name" class="java.lang.String"/>
+	<field name="stock_picking_transportation_reason_name" class="java.lang.String"/>
+	<field name="fiscaldoc_causalidoc_tipo_documento" class="java.lang.String"/>
+	<field name="account_payment_term_name" class="java.lang.String"/>
+	<field name="account_tax_description" class="java.lang.String"/>
+	<field name="fiscaldoc_spedizioni_name" class="java.lang.String"/>
+	<sortField name="fiscaldoc_header_numdoc"/>
+	<group name="FAT" isStartNewPage="true" isResetPageNumber="true">
+		<groupExpression><![CDATA[$F{fiscaldoc_header_name}+$F{fiscaldoc_header_data_documento}]]></groupExpression>
+		<groupHeader>
+			<band height="8"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="4"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="160" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="255" y="70" width="293" height="85" forecolor="#808080" backcolor="#808080"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="250" y="70" width="293" height="80" forecolor="#000000" backcolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="256" y="72" width="100" height="10"/>
+				<textElement>
+					<font size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Intestatario Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="127" width="28" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[C. Fis.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="256" y="127" width="28" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[P. IVA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="256" y="82" width="100" height="15"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="256" y="97" width="100" height="15"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_address_street}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="256" y="112" width="50" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_address_zip}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="284" y="127" width="81" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_vat}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="393" y="127" width="100" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_fiscalcode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="307" y="112" width="129" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_address_city}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="127" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="4" y="6" width="550" height="36" forecolor="#808080" backcolor="#808080"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="1" y="1" width="550" height="36"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="250" y="5" width="52" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Numero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="5" width="65" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Codice Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="5" width="66" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="5" width="74" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="515" y="5" width="35" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Pagina]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="515" y="16" width="35" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="16" width="65" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{fiscaldoc_header_partner_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="419" y="16" width="74" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fiscaldoc_header_data_documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="16" width="66" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fiscaldoc_causalidoc_tipo_documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="16" width="170" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fiscaldoc_header_name}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="10">
+				<reportElement x="5" y="93" width="550" height="31" forecolor="#808080" backcolor="#808080"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="2" y="88" width="550" height="32"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="325" y="94" width="50" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Prezzo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="94" width="55" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Quantità]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="94" width="24" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[UM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="433" y="94" width="60" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Importo	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="94" width="162" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Articolo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="94" width="45" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Cod. IVA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="94" width="50" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Sconto]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="5" y="47" width="550" height="36" forecolor="#808080" backcolor="#808080"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="2" y="42" width="550" height="36"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="165" y="45" width="70" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Sconto Extra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="45" width="75" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Banca d'appoggio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="45" width="140" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Pagamento]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="254" y="60" width="100" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{fiscaldoc_header_banca_patner}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="94" width="47" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Codice	]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="60" width="140" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{account_payment_term_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<frame>
+				<reportElement style="Righe" mode="Opaque" x="0" y="0" width="555" height="32"/>
+				<textField>
+					<reportElement x="500" y="0" width="50" height="15"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{account_tax_description}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="235" y="0" width="24" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{product_uom_name}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="50" y="17" width="172" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fiscaldoc_righe_descrizione_riga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="265" y="0" width="55" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fiscaldoc_righe_product_uom_qty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="325" y="0" width="50" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fiscaldoc_righe_product_prezzo_unitario}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
+				<reportElement x="379" y="0" width="50" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fiscaldoc_righe_sconti_riga}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="433" y="0" width="60" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fiscaldoc_righe_totale_riga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="0" width="164" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{product_product_name_template}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="0" width="47" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{product_product_default_code}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="23" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="148" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="3" y="3" width="555" height="145" forecolor="#777777" backcolor="#777777"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="3" y="1" width="553" height="143" forecolor="#131313"/>
+			</rectangle>
+			<line>
+				<reportElement mode="Transparent" x="306" y="83" width="249" height="1"/>
+			</line>
+			<rectangle radius="10">
+				<reportElement mode="Opaque" x="420" y="38" width="132" height="43" forecolor="#777777" backcolor="#777777"/>
+			</rectangle>
+			<line>
+				<reportElement x="3" y="38" width="552" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="11" y="6" width="100" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Causa del Trasporto	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="51" width="100" height="20">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_COUNT}.intValue() > 21)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Segue ...]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="5" width="60" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Colli]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement mode="Transparent" x="306" y="38" width="1" height="106"/>
+			</line>
+			<staticText>
+				<reportElement x="5" y="43" width="295" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Castelletto IVA]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="419" y="38" width="130" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="300" y="5" width="72" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Aspetto dei beni	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="43" width="100" height="11"/>
+				<textElement>
+					<font size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Totale Documento]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="226" y="115" width="75" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fiscaldoc_header_totale_imposta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="436" y="54" width="100" height="20">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_COUNT}.intValue() < 9)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fiscaldoc_header_totale_merce}+$F{fiscaldoc_header_totale_imposta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="165" y="54" width="50" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[IVA 4%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="65" width="50" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[IVA 10%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="76" width="50" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[IVA 20%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="6" width="90" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Trasporto a mezzo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="115" width="60" height="15"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Totale IVA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="76" width="50" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Imponibile]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="54" width="50" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Imponibile]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="65" width="50" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Imponibile]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="115" width="90" height="15"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Totale Imponibile	]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="100" y="115" width="65" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fiscaldoc_header_totale_imponibile}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="91" width="72" height="11"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Firma Vettore	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="91" width="89" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Firma Conducente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="115" width="89" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Firma Destinatario]]></text>
+			</staticText>
+			<line>
+				<reportElement mode="Transparent" x="430" y="135" width="100" height="1"/>
+			</line>
+			<line>
+				<reportElement mode="Transparent" x="430" y="108" width="100" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="436" y="54" width="100" height="20">
+					<printWhenExpression><![CDATA[new Boolean($V{PAGE_COUNT}.intValue() > 9)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Segue ...]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="10" y="16" width="100" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{stock_picking_transportation_reason_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="452" y="16" width="60" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{fiscaldoc_header_totale_colli}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="299" y="16" width="72" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{stock_picking_goods_description_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="159" y="16" width="90" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fiscaldoc_spedizioni_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

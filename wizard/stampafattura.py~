@@ -1,0 +1,66 @@
+# -*- encoding: utf-8 -*-
+
+import wizard
+import pooler
+import time
+from tools.translate import _
+
+date_form = '''<?xml version="1.0"?>
+<form string="Parametri di Stampa"  >
+    <field name="dadata" colspan="4" />
+    <field name="adata" colspan="4" />
+    <field name="danrv" colspan="4"/>
+    <field name="anrv" width="500"/>
+
+</form>'''
+
+date_fields = {
+    'dadata': {'string':'Da Data', 'type':'date', 'required':True },
+    'adata': {'string':'A Data', 'type':'date', 'required':True },
+    'danrv': {'string':'Numero Iniziale', 'type':'char', 'size':"100",'required':True },
+    'anrv': {'string':'Numero Finale', 'type':'char','size':"100", 'required':True },
+}
+
+
+def _imposta_variabili(self, cr, uid, data, context=None):
+         
+        pool = pooler.get_pool(cr.dbname)
+        fatture = pool.get('fiscaldoc.header')
+        Primo = True
+        if data['ids']:
+            for ordine in fatture.browse(cr, uid, data['ids'], context=context):
+                if Primo:
+                    Primo = False
+                    DtIni = ordine['data_documento']
+                    NrIni = ordine['name']
+                    danr = ordine['id']
+                #import pdb;pdb.set_trace()
+                DtFin = ordine['data_documento']
+                NrFin = ordine['name']
+                anr = ordine['id']
+        
+        return{'dadata':DtIni,'adata':DtFin,'danrv':NrIni,'anrv':NrFin}
+def _passa_variabili(self, cr, uid, data, context=None):
+             return{
+                    'parameters':{'danr':data['form']['danrv'],'anr':data['form']['anrv'],'dadata':data['form']['dadata'],'adata':data['form']['adata']},
+                }
+        
+class wizard_report_fattura(wizard.interface):
+
+ 
+
+    states = {
+
+        'init': {
+            'actions': [_imposta_variabili],
+            'result': {'type':'form', 'arch':date_form,'fields':date_fields, 'state':[('end','Cancel','gtk-cancel'),('report','Print','gtk-print')]}
+        },
+        'report': {
+            'actions': [_passa_variabili],
+            'result': {'type':'print', 'report':'Fattura',
+                        'state':'end'
+                        }
+        }
+    }
+wizard_report_fattura('fattura.wizard.report.fattura')
+
