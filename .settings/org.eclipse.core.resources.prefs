@@ -1,6 +1,7 @@
-#Sun Jun 19 12:59:20 CEST 2011
+#Sat Sep 10 11:54:04 CEST 2011
 eclipse.preferences.version=1
 encoding//wizard/StampaOrdini.py=utf-8
 encoding//wizard/__init__.py=utf-8
+encoding//wizard/parser.py=utf-8
 encoding/__init__.py=utf-8
 encoding/__terp__.py=utf-8

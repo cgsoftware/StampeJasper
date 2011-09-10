@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ordine Fornitore" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="92"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Righe" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#C3D4E6"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="dadata" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="adata" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="danr" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="anr" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     purchase_order_line."product_uom" AS purchase_order_line_product_uom,
+     purchase_order_line."order_id" AS purchase_order_line_order_id,
+     purchase_order_line."price_unit" AS purchase_order_line_price_unit,
+     purchase_order_line."product_qty" AS purchase_order_line_product_qty,
+     purchase_order_line."name" AS purchase_order_line_name,
+     purchase_order_line."notes" AS purchase_order_line_notes,
+     purchase_order_line."product_id" AS purchase_order_line_product_id,
+     purchase_order."partner_ref" AS purchase_order_partner_ref,
+     purchase_order."date_order" AS purchase_order_date_order,
+     purchase_order."date_approve" AS purchase_order_date_approve,
+     purchase_order."fiscal_position" AS purchase_order_fiscal_position,
+     purchase_order."amount_untaxed" AS purchase_order_amount_untaxed,
+     purchase_order."name" AS purchase_order_name,
+     purchase_order."partner_id" AS purchase_order_partner_id,
+     purchase_order."notes" AS purchase_order_notes,
+     purchase_order."amount_tax" AS purchase_order_amount_tax,
+     purchase_order."amount_total" AS purchase_order_amount_total,
+     purchase_order."partner_address_id" AS purchase_order_partner_address_id,
+     res_partner_address."zip" AS res_partner_address_zip,
+     res_partner_address."name" AS res_partner_address_name,
+     res_partner_address."city" AS res_partner_address_city,
+     res_partner."name" AS res_partner_name,
+     res_partner."vat" AS res_partner_vat,
+     res_partner."fiscalcode" AS res_partner_fiscalcode,
+     product_product."product_tmpl_id" AS product_product_product_tmpl_id,
+     product_product."name_template" AS product_product_name_template,
+     product_uom."name" AS product_uom_name,
+     res_partner_address."street" AS res_partner_address_street,
+     purchase_order_line."date_planned" AS purchase_order_line_date_planned
+FROM
+     "public"."purchase_order" purchase_order INNER JOIN "public"."purchase_order_line" purchase_order_line ON purchase_order."id" = purchase_order_line."order_id"
+     LEFT OUTER JOIN "public"."res_partner_address" res_partner_address ON purchase_order."partner_address_id" = res_partner_address."id"
+     LEFT OUTER JOIN "public"."res_partner" res_partner ON purchase_order."partner_id" = res_partner."id"
+     LEFT OUTER JOIN "public"."product_product" product_product ON purchase_order_line."product_id" = product_product."id"
+     LEFT OUTER JOIN "public"."product_uom" product_uom ON purchase_order_line."product_uom" = product_uom."id"
+WHERE
+     purchase_order."name" >= $P{danr}
+ AND purchase_order."name" <= $P{anr}
+ AND purchase_order."date_order" >= to_date($P{dadata},'YYYY-MM-DD')
+ AND purchase_order."date_order" <= to_date($P{adata},'YYYY-MM-DD')
+ORDER BY
+     purchase_order_name ASC]]>
+	</queryString>
+	<field name="purchase_order_line_product_uom" class="java.lang.Integer"/>
+	<field name="purchase_order_line_order_id" class="java.lang.Integer"/>
+	<field name="purchase_order_line_price_unit" class="java.math.BigDecimal"/>
+	<field name="purchase_order_line_product_qty" class="java.math.BigDecimal"/>
+	<field name="purchase_order_line_name" class="java.lang.String"/>
+	<field name="purchase_order_line_notes" class="java.lang.String"/>
+	<field name="purchase_order_line_product_id" class="java.lang.Integer"/>
+	<field name="purchase_order_partner_ref" class="java.lang.String"/>
+	<field name="purchase_order_date_order" class="java.sql.Date"/>
+	<field name="purchase_order_date_approve" class="java.sql.Date"/>
+	<field name="purchase_order_fiscal_position" class="java.lang.Integer"/>
+	<field name="purchase_order_amount_untaxed" class="java.math.BigDecimal"/>
+	<field name="purchase_order_name" class="java.lang.String"/>
+	<field name="purchase_order_partner_id" class="java.lang.Integer"/>
+	<field name="purchase_order_notes" class="java.lang.String"/>
+	<field name="purchase_order_amount_tax" class="java.math.BigDecimal"/>
+	<field name="purchase_order_amount_total" class="java.math.BigDecimal"/>
+	<field name="purchase_order_partner_address_id" class="java.lang.Integer"/>
+	<field name="res_partner_address_zip" class="java.lang.String"/>
+	<field name="res_partner_address_name" class="java.lang.String"/>
+	<field name="res_partner_address_city" class="java.lang.String"/>
+	<field name="res_partner_name" class="java.lang.String"/>
+	<field name="res_partner_vat" class="java.lang.String"/>
+	<field name="res_partner_fiscalcode" class="java.lang.String"/>
+	<field name="product_product_product_tmpl_id" class="java.lang.Integer"/>
+	<field name="product_product_name_template" class="java.lang.String"/>
+	<field name="product_uom_name" class="java.lang.String"/>
+	<field name="res_partner_address_street" class="java.lang.String"/>
+	<field name="purchase_order_line_date_planned" class="java.sql.Date"/>
+	<sortField name="purchase_order_name"/>
+	<group name="nr.ordine" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{purchase_order_name}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="partner" isStartNewColumn="true" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{res_partner_name}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="164" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="533" y="19" width="268" height="75" forecolor="#777777" backcolor="#777777"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="528" y="14" width="270" height="77" backcolor="#FFFFFF"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="563" y="51" width="157" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{res_partner_address_city}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="533" y="36" width="246" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{res_partner_address_street}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="536" y="9" width="100" height="20"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Intestatario Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="533" y="66" width="58" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[P. IVA/C. Fisc.]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="591" y="66" width="95" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{res_partner_vat}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="533" y="51" width="30" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{res_partner_address_zip}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="533" y="21" width="246" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{res_partner_name}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="10">
+				<reportElement x="1" y="109" width="794" height="52" forecolor="#777777" backcolor="#777777"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="1" y="99" width="791" height="60"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="103" width="50" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Magazzino]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="151" y="103" width="70" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Codice Fornitore]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="151" y="113" width="70" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{purchase_order_partner_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="298" y="103" width="70" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="113" width="128" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ORDINE A FORNITORE	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="442" y="103" width="70" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Numero]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="442" y="113" width="70" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{purchase_order_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="591" y="103" width="70" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="591" y="113" width="70" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{purchase_order_date_order}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="721" y="103" width="50" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Pagina]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="721" y="113" width="50" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="131" width="791" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="5" y="133" width="71" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Pagamento	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="206" y="133" width="70" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Valuta	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="133" width="50" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Banca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="206" y="143" width="70" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[EURO]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="3" width="364" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Articolo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="634" y="3" width="45" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Importo	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="504" y="3" width="45" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Prezzo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="3" width="24" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[UM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="3" width="55" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Quantità]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="697" y="3" width="75" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Data Evasione]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="569" y="3" width="45" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Sconto	]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement style="Righe" mode="Opaque" x="0" y="0" width="800" height="15"/>
+				<textField>
+					<reportElement x="376" y="0" width="24" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{product_uom_name}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="3" y="0" width="364" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{purchase_order_line_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="422" y="0" width="55" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{purchase_order_line_product_qty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="504" y="0" width="45" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{purchase_order_line_price_unit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="634" y="0" width="45" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{purchase_order_line_price_unit}*$F{purchase_order_line_product_qty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="697" y="0" width="75" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{purchase_order_line_date_planned}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="179" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="5" width="290" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Si prega di inviare conferma d'ordine]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="0" y="35" width="795" height="142" forecolor="#777777" backcolor="#777777"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="0" y="30" width="791" height="142"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="35" width="100" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Trasporto a Mezzo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="35" width="150" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Causale del Trasporto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="50" width="150" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ORDINE A FORNITORE	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="547" y="35" width="70" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Totale Merce]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="700" y="35" width="70" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Totale Imposta]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="548" y="50" width="69" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{purchase_order_amount_untaxed}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="700" y="50" width="73" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{purchase_order_amount_tax}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="80" width="791" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="5" y="87" width="100" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[NOTE]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="5" y="103" width="249" height="69"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{purchase_order_notes}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="254" y="80" width="1" height="92"/>
+			</line>
+			<line>
+				<reportElement x="254" y="125" width="537" height="1"/>
+			</line>
+			<rectangle radius="10">
+				<reportElement x="652" y="84" width="135" height="39"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="660" y="86" width="98" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Totale Documento Eur]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="679" y="100" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{purchase_order_amount_total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="258" y="83" width="109" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Porto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="258" y="129" width="109" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Incaricato del trasporto]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

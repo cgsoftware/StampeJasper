@@ -29,7 +29,34 @@
             res_model="stampa.ordini"
             src_model="sale.order"
             view_mode="form" target="new" view_type="form" />
+            
+            
+        <record id="view_stampa_fornitori" model="ir.ui.view">
+            <field name="name">Purchase Order</field>
+            <field name="model">stampa.ordini.fornitori</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                    <form string="Parametri di Stampa"  >
+                        <field name="dadata" colspan="4" />
+                        <field name="adata" colspan="4" />
+                        <field name="danrv" colspan="4"/>
+                        <field name="anrv" width="300" colspan="4"/>
+                        <separator colspan="4"/>
+                        <group col="4" colspan="4">
+                            <button icon="gtk-cancel" special="cancel" string="Cancel" colspan="2"/>
+                            <button icon="gtk-print" name="check_report" string="Stampa" type="object" colspan="2" default_focus="1" />
+                        </group>
+                    </form>
+                
+            </field>
+        </record>
         
+        <act_window id="action_view_stampa_fornitori"
+            key2="client_print_multi"
+            name="Purchase Order"
+            res_model="stampa.ordini.fornitori"
+            src_model="purchase.order"
+            view_mode="form" target="new" view_type="form" />
         
     </data>
 </openerp>

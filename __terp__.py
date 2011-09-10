@@ -27,7 +27,7 @@
     'author': 'C & G Software sas',
     'website': 'http://www.cgsoftware.it',
     "depends" : ['base','sale','jasper_reports'],
-    "update_xml" : ['wizard/StampaOrdini.xml'],
+    "update_xml" : ['wizard/StampaOrdini.xml', 'report.xml'],
     "active": False,
     "installable": True
 }
