@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ordine" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="242"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="362"/>
+	<property name="ireport.y" value="344"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -36,12 +36,15 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="adata" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="danr" class="java.lang.String">
-		<parameterDescription><![CDATA[Inserisci il numero ordine]]></parameterDescription>
+		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
-	<parameter name="anr" class="java.lang.String"/>
+	<parameter name="anr" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      sale_order."shop_id" AS sale_order_shop_id,
@@ -49,113 +52,111 @@
      sale_order."date_order" AS sale_order_date_order,
      sale_order."partner_id" AS sale_order_partner_id,
      sale_order."note" AS sale_order_note,
-     sale_order."fiscal_position" AS sale_order_fiscal_position,
      sale_order."amount_untaxed" AS sale_order_amount_untaxed,
      sale_order."payment_term" AS sale_order_payment_term,
      sale_order."amount_tax" AS sale_order_amount_tax,
-     sale_order."pricelist_id" AS sale_order_pricelist_id,
      sale_order."partner_order_id" AS sale_order_partner_order_id,
-     sale_order."partner_invoice_id" AS sale_order_partner_invoice_id,
      sale_order."date_confirm" AS sale_order_date_confirm,
      sale_order."amount_total" AS sale_order_amount_total,
      sale_order."name" AS sale_order_name,
-     sale_order_line."order_id" AS sale_order_line_order_id,
+     sale_order."partner_shipping_id" AS sale_order_partner_shipping_id,
+     sale_order."carrier_id" AS sale_order_carrier_id,
+     sale_order."requested_date" AS sale_order_requested_date,
      sale_order_line."product_uos_qty" AS sale_order_line_product_uos_qty,
      sale_order_line."procurement_id" AS sale_order_line_procurement_id,
      sale_order_line."product_uom" AS sale_order_line_product_uom,
+     sale_order_line."order_id" AS sale_order_line_order_id,
      sale_order_line."price_unit" AS sale_order_line_price_unit,
      sale_order_line."product_uom_qty" AS sale_order_line_product_uom_qty,
      sale_order_line."discount" AS sale_order_line_discount,
      sale_order_line."product_uos" AS sale_order_line_product_uos,
+     sale_order_line."delay" AS sale_order_line_delay,
      sale_order_line."name" AS sale_order_line_name,
+     sale_order_line."notes" AS sale_order_line_notes,
+     sale_order_line."state" AS sale_order_line_state,
+     sale_order_line."product_id" AS sale_order_line_product_id,
      sale_order_line."th_weight" AS sale_order_line_th_weight,
      sale_order_line."product_packaging" AS sale_order_line_product_packaging,
-     sale_order_line."product_id" AS sale_order_line_product_id,
-     res_partner."user_id" AS res_partner_user_id,
-     res_partner."name" AS res_partner_name,
-     res_partner."company_id" AS res_partner_company_id,
-     res_partner."vat" AS res_partner_vat,
-     res_partner."vat_subjected" AS res_partner_vat_subjected,
-     res_partner."fiscalcode" AS res_partner_fiscalcode,
-     res_partner."customer" AS res_partner_customer,
-     res_partner_address."street" AS res_partner_address_street,
-     res_partner_address."zip" AS res_partner_address_zip,
-     res_partner_address."country_id" AS res_partner_address_country_id,
-     res_partner_address."state_id" AS res_partner_address_state_id,
-     res_partner_address."city" AS res_partner_address_city,
-     sale_order."partner_shipping_id" AS sale_order_partner_shipping_id,
      sale_order_line."type" AS sale_order_line_type,
-     product_uom."name" AS product_uom_name,
-     product_uom."category_id" AS product_uom_category_id,
-     product_uom."id" AS product_uom_id,
-     product_product."product_tmpl_id" AS product_product_product_tmpl_id,
-     product_product."id" AS product_product_id,
+     sale_order_line."address_allotment_id" AS sale_order_line_address_allotment_id,
+     sale_order_line."purchase_price" AS sale_order_line_purchase_price,
+     sale_order_line."order_partner_id" AS sale_order_line_order_partner_id,
+     sale_order_line."string_discount" AS sale_order_line_string_discount,
+     sale_order_line."extra_price_variant" AS sale_order_line_extra_price_variant,
+     res_partner."name" AS res_partner_name,
+     res_partner."vat" AS res_partner_vat,
+     res_partner."fiscalcode" AS res_partner_fiscalcode,
+     res_partner."agent_id" AS res_partner_agent_id,
+     res_partner_address."name" AS res_partner_address_name,
+     res_partner_address."zip" AS res_partner_address_zip,
+     res_partner_address."city" AS res_partner_address_city,
+     res_partner_address."street" AS res_partner_address_street,
+     product_product."default_code" AS product_product_default_code,
      product_product."name_template" AS product_product_name_template,
-     product_product."variants" AS product_product_variants,
-     product_uom_categ."name" AS product_uom_categ_name,
-     product_uom_categ."id" AS product_uom_categ_id
+     product_uom."name" AS product_uom_name,
+     account_payment_term."name" AS account_payment_term_name
 FROM
      "public"."sale_order" sale_order INNER JOIN "public"."sale_order_line" sale_order_line ON sale_order."id" = sale_order_line."order_id"
      INNER JOIN "public"."res_partner" res_partner ON sale_order."partner_id" = res_partner."id"
      INNER JOIN "public"."res_partner_address" res_partner_address ON sale_order."partner_shipping_id" = res_partner_address."id"
-     INNER JOIN "public"."product_product" product_product ON sale_order_line."product_id" = product_product."id"
-     INNER JOIN "public"."product_uom" product_uom ON product_uom."id" = sale_order_line."product_uom"
-     INNER JOIN "public"."product_uom_categ" product_uom_categ ON product_uom."category_id" = product_uom_categ."id"
+     LEFT OUTER JOIN "public"."account_payment_term" account_payment_term ON sale_order."payment_term" = account_payment_term."id"
+     AND res_partner."id" = res_partner_address."partner_id"
+     LEFT OUTER JOIN "public"."product_product" product_product ON sale_order_line."product_id" = product_product."id"
+     LEFT OUTER JOIN "public"."product_uom" product_uom ON sale_order_line."product_uom" = product_uom."id"
 WHERE
-sale_order."name">=$P{danr} AND sale_order."name"<=$P{anr}
- AND sale_order."date_order">=to_date($P{dadata},'YYYY-MM-DD')
-AND sale_order."date_order"<=to_date($P{adata},'YYYY-MM-DD')]]>
+     sale_order."name" >= $P{danr}
+ AND sale_order."name" <= $P{anr}
+ AND sale_order."date_order" >= to_date($P{dadata},'YYYY-MM-DD')
+ AND sale_order."date_order" <= to_date($P{dadata},'YYYY-MM-DD')]]>
 	</queryString>
 	<field name="sale_order_shop_id" class="java.lang.Integer"/>
 	<field name="sale_order_client_order_ref" class="java.lang.String"/>
 	<field name="sale_order_date_order" class="java.sql.Date"/>
 	<field name="sale_order_partner_id" class="java.lang.Integer"/>
 	<field name="sale_order_note" class="java.lang.String"/>
-	<field name="sale_order_fiscal_position" class="java.lang.Integer"/>
 	<field name="sale_order_amount_untaxed" class="java.math.BigDecimal"/>
 	<field name="sale_order_payment_term" class="java.lang.Integer"/>
 	<field name="sale_order_amount_tax" class="java.math.BigDecimal"/>
-	<field name="sale_order_pricelist_id" class="java.lang.Integer"/>
 	<field name="sale_order_partner_order_id" class="java.lang.Integer"/>
-	<field name="sale_order_partner_invoice_id" class="java.lang.Integer"/>
 	<field name="sale_order_date_confirm" class="java.sql.Date"/>
 	<field name="sale_order_amount_total" class="java.math.BigDecimal"/>
 	<field name="sale_order_name" class="java.lang.String"/>
-	<field name="sale_order_line_order_id" class="java.lang.Integer"/>
+	<field name="sale_order_partner_shipping_id" class="java.lang.Integer"/>
+	<field name="sale_order_carrier_id" class="java.lang.Integer"/>
+	<field name="sale_order_requested_date" class="java.sql.Date"/>
 	<field name="sale_order_line_product_uos_qty" class="java.lang.Double"/>
 	<field name="sale_order_line_procurement_id" class="java.lang.Integer"/>
 	<field name="sale_order_line_product_uom" class="java.lang.Integer"/>
+	<field name="sale_order_line_order_id" class="java.lang.Integer"/>
 	<field name="sale_order_line_price_unit" class="java.math.BigDecimal"/>
 	<field name="sale_order_line_product_uom_qty" class="java.math.BigDecimal"/>
 	<field name="sale_order_line_discount" class="java.math.BigDecimal"/>
 	<field name="sale_order_line_product_uos" class="java.lang.Integer"/>
+	<field name="sale_order_line_delay" class="java.lang.Double"/>
 	<field name="sale_order_line_name" class="java.lang.String"/>
+	<field name="sale_order_line_notes" class="java.lang.String"/>
+	<field name="sale_order_line_state" class="java.lang.String"/>
+	<field name="sale_order_line_product_id" class="java.lang.Integer"/>
 	<field name="sale_order_line_th_weight" class="java.lang.Double"/>
 	<field name="sale_order_line_product_packaging" class="java.lang.Integer"/>
-	<field name="sale_order_line_product_id" class="java.lang.Integer"/>
-	<field name="res_partner_user_id" class="java.lang.Integer"/>
-	<field name="res_partner_name" class="java.lang.String"/>
-	<field name="res_partner_company_id" class="java.lang.Integer"/>
-	<field name="res_partner_vat" class="java.lang.String"/>
-	<field name="res_partner_vat_subjected" class="java.lang.Boolean"/>
-	<field name="res_partner_fiscalcode" class="java.lang.String"/>
-	<field name="res_partner_customer" class="java.lang.Boolean"/>
-	<field name="res_partner_address_street" class="java.lang.String"/>
-	<field name="res_partner_address_zip" class="java.lang.String"/>
-	<field name="res_partner_address_country_id" class="java.lang.Integer"/>
-	<field name="res_partner_address_state_id" class="java.lang.Integer"/>
-	<field name="res_partner_address_city" class="java.lang.String"/>
-	<field name="sale_order_partner_shipping_id" class="java.lang.Integer"/>
 	<field name="sale_order_line_type" class="java.lang.String"/>
-	<field name="product_uom_name" class="java.lang.String"/>
-	<field name="product_uom_category_id" class="java.lang.Integer"/>
-	<field name="product_uom_id" class="java.lang.Integer"/>
-	<field name="product_product_product_tmpl_id" class="java.lang.Integer"/>
-	<field name="product_product_id" class="java.lang.Integer"/>
+	<field name="sale_order_line_address_allotment_id" class="java.lang.Integer"/>
+	<field name="sale_order_line_purchase_price" class="java.math.BigDecimal"/>
+	<field name="sale_order_line_order_partner_id" class="java.lang.Integer"/>
+	<field name="sale_order_line_string_discount" class="java.lang.String"/>
+	<field name="sale_order_line_extra_price_variant" class="java.math.BigDecimal"/>
+	<field name="res_partner_name" class="java.lang.String"/>
+	<field name="res_partner_vat" class="java.lang.String"/>
+	<field name="res_partner_fiscalcode" class="java.lang.String"/>
+	<field name="res_partner_agent_id" class="java.lang.Integer"/>
+	<field name="res_partner_address_name" class="java.lang.String"/>
+	<field name="res_partner_address_zip" class="java.lang.String"/>
+	<field name="res_partner_address_city" class="java.lang.String"/>
+	<field name="res_partner_address_street" class="java.lang.String"/>
+	<field name="product_product_default_code" class="java.lang.String"/>
 	<field name="product_product_name_template" class="java.lang.String"/>
-	<field name="product_product_variants" class="java.lang.String"/>
-	<field name="product_uom_categ_name" class="java.lang.String"/>
-	<field name="product_uom_categ_id" class="java.lang.Integer"/>
+	<field name="product_uom_name" class="java.lang.String"/>
+	<field name="account_payment_term_name" class="java.lang.String"/>
 	<sortField name="sale_order_name"/>
 	<sortField name="sale_order_date_order"/>
 	<group name="Ordine" isStartNewPage="true" isResetPageNumber="true">
@@ -169,9 +170,6 @@ AND sale_order."date_order"<=to_date($P{adata},'YYYY-MM-DD')]]>
 			</band>
 		</groupFooter>
 	</group>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
 	<title>
 		<band height="2" splitType="Stretch"/>
 	</title>
@@ -184,11 +182,11 @@ AND sale_order."date_order"<=to_date($P{adata},'YYYY-MM-DD')]]>
 				<reportElement x="279" y="101" width="273" height="65" backcolor="#FFFFFF"/>
 			</rectangle>
 			<textField>
-				<reportElement x="303" y="113" width="129" height="13"/>
+				<reportElement x="303" y="113" width="243" height="13"/>
 				<textElement verticalAlignment="Middle">
 					<font size="11" isBold="true" isStrikeThrough="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{res_partner_name}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="303" y="103" width="138" height="11"/>
@@ -198,39 +196,25 @@ AND sale_order."date_order"<=to_date($P{adata},'YYYY-MM-DD')]]>
 				<text><![CDATA[Intestatario Documento]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="303" y="125" width="129" height="13"/>
+				<reportElement mode="Transparent" x="303" y="125" width="243" height="13"/>
 				<textElement verticalAlignment="Middle">
-					<font size="9"/>
+					<font size="8"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_address_street}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{res_partner_address_street}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="330" y="149" width="95" height="13"/>
 				<textElement verticalAlignment="Middle">
-					<font size="9"/>
+					<font size="8"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_vat}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{res_partner_vat}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="303" y="137" width="45" height="13"/>
 				<textElement verticalAlignment="Middle">
-					<font size="9"/>
+					<font size="8"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_address_zip}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="348" y="137" width="84" height="13"/>
-				<textElement verticalAlignment="Middle">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{res_partner_address_city}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="455" y="149" width="94" height="13"/>
-				<textElement verticalAlignment="Middle">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_fiscalcode}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{res_partner_address_zip}]]></textFieldExpression>
 			</textField>
 			<rectangle radius="10">
 				<reportElement x="5" y="106" width="270" height="67" forecolor="#777777" backcolor="#777777"/>
@@ -268,7 +252,7 @@ AND sale_order."date_order"<=to_date($P{adata},'YYYY-MM-DD')]]>
 			<textField>
 				<reportElement x="123" y="188" width="72" height="16"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{sale_order_partner_id}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sale_order_partner_id}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="222" y="178" width="72" height="11"/>
@@ -294,7 +278,7 @@ AND sale_order."date_order"<=to_date($P{adata},'YYYY-MM-DD')]]>
 			<textField>
 				<reportElement x="488" y="188" width="45" height="18" printWhenGroupChanges="Ordine"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="315" y="178" width="65" height="11"/>
@@ -308,7 +292,7 @@ AND sale_order."date_order"<=to_date($P{adata},'YYYY-MM-DD')]]>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="10" isBold="true" isItalic="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{sale_order_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sale_order_name}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="389" y="178" width="79" height="11"/>
@@ -318,11 +302,11 @@ AND sale_order."date_order"<=to_date($P{adata},'YYYY-MM-DD')]]>
 				<text><![CDATA[Data Documento]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="389" y="188" width="58" height="16"/>
+				<reportElement x="389" y="188" width="79" height="16"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="false" isItalic="false"/>
 				</textElement>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{sale_order_date_order}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sale_order_date_order}]]></textFieldExpression>
 			</textField>
 			<rectangle radius="10">
 				<reportElement x="0" y="216" width="554" height="80"/>
@@ -373,19 +357,26 @@ AND sale_order."date_order"<=to_date($P{adata},'YYYY-MM-DD')]]>
 				<text><![CDATA[P. IVA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="427" y="149" width="25" height="13"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[C.Fis.]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="170" y="228" width="52" height="11"/>
 				<textElement textAlignment="Left" verticalAlignment="Bottom">
 					<font size="8" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[EURO]]></text>
 			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="348" y="138" width="198" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{res_partner_address_city}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="228" width="145" height="13"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{account_payment_term_name}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -398,89 +389,106 @@ AND sale_order."date_order"<=to_date($P{adata},'YYYY-MM-DD')]]>
 				<text><![CDATA[Articolo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="279" y="7" width="24" height="20"/>
+				<reportElement x="259" y="7" width="24" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="false" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[UM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="304" y="7" width="55" height="20"/>
+				<reportElement x="284" y="7" width="55" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="false" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Quantità]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="359" y="7" width="45" height="20"/>
+				<reportElement x="339" y="7" width="45" height="20"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="9" isBold="false" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Prezzo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="405" y="7" width="45" height="20"/>
+				<reportElement x="429" y="7" width="45" height="20"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="9" isBold="false" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Importo	]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="453" y="7" width="75" height="20"/>
+				<reportElement x="477" y="7" width="75" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="false" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Data Evasione]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="387" y="7" width="38" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Sconto]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="15" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<frame>
-				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="15"/>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="30"/>
 				<textField pattern="¤ #,##0.00">
-					<reportElement x="405" y="1" width="45" height="14">
-						<printWhenExpression><![CDATA[$F{sale_order_line_product_uos_qty}*$F{sale_order_line_price_unit}>0]]></printWhenExpression>
-					</reportElement>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<reportElement x="429" y="0" width="45" height="15"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font size="8"/>
 					</textElement>
-					<textFieldExpression class="java.lang.Number"><![CDATA[$F{sale_order_line_product_uos_qty}*$F{sale_order_line_price_unit}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{sale_order_line_product_uos_qty}*$F{sale_order_line_price_unit}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="280" y="0" width="20" height="14">
-						<printWhenExpression><![CDATA[false]]></printWhenExpression>
-					</reportElement>
-					<textElement/>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{product_uom_name}]]></textFieldExpression>
+					<reportElement x="260" y="0" width="20" height="15"/>
+					<textElement verticalAlignment="Top"/>
+					<textFieldExpression><![CDATA[$F{product_uom_name}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="388" y="0" width="37" height="15"/>
+					<textElement verticalAlignment="Top">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{sale_order_line_string_discount}]]></textFieldExpression>
 				</textField>
 			</frame>
-			<textField>
-				<reportElement x="5" y="0" width="217" height="14" isPrintInFirstWholeBand="true"/>
-				<textElement verticalAlignment="Middle">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="5" y="0" width="217" height="15" isPrintInFirstWholeBand="true"/>
+				<textElement verticalAlignment="Top">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{sale_order_line_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sale_order_line_name}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0">
-				<reportElement x="304" y="1" width="54" height="14"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="284" y="0" width="54" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{sale_order_line_product_uos_qty}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sale_order_line_product_uos_qty}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="359" y="1" width="48" height="14"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<reportElement x="339" y="0" width="48" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sale_order_line_price_unit}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sale_order_line_price_unit}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="5" y="16" width="217" height="14" isRemoveLineWhenBlank="true"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sale_order_line_notes}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement positionType="Float" x="231" y="0" width="14" height="14"/>
+				<reportElement positionType="Float" x="224" y="0" width="14" height="14"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="256" y="0" width="14" height="14"/>
+				<reportElement x="242" y="0" width="14" height="14"/>
 			</rectangle>
 		</band>
 	</detail>
@@ -498,22 +506,18 @@ AND sale_order."date_order"<=to_date($P{adata},'YYYY-MM-DD')]]>
 				<reportElement x="0" y="0" width="553" height="113" forecolor="#131313"/>
 			</rectangle>
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="149" y="13" width="100" height="20">
-					<printWhenExpression><![CDATA[new Boolean($V{PAGE_COUNT}.intValue() < 22)]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="149" y="13" width="100" height="20"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sale_order_amount_untaxed}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sale_order_amount_untaxed}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="450" y="13" width="75" height="20">
-					<printWhenExpression><![CDATA[new Boolean($V{PAGE_COUNT}.intValue() < 22)]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="450" y="13" width="75" height="20"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sale_order_amount_tax}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sale_order_amount_tax}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="35" width="552" height="1"/>
@@ -552,7 +556,7 @@ AND sale_order."date_order"<=to_date($P{adata},'YYYY-MM-DD')]]>
 				<textElement textAlignment="Right">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{sale_order_amount_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sale_order_amount_total}]]></textFieldExpression>
 			</textField>
 			<line direction="BottomUp">
 				<reportElement mode="Transparent" x="250" y="35" width="1" height="78"/>
@@ -585,7 +589,4 @@ AND sale_order."date_order"<=to_date($P{adata},'YYYY-MM-DD')]]>
 			</staticText>
 		</band>
 	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

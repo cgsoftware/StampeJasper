@@ -38,7 +38,7 @@ class stampa_ordini(osv.osv_memory):
         Primo = True
         return {
                 'type': 'ir.actions.report.xml',
-                'report_name': 'StampaOrdine',
+                'report_name': 'ordinecliente',
                 'datas': data,
             }
  
