@@ -11,6 +11,7 @@
                         <field name="adata" colspan="4" />
                         <field name="danrv" colspan="4"/>
                         <field name="anrv" width="300" colspan="4"/>
+                        <field name="prezzi"/>
                         <separator colspan="4"/>
                         <group col="4" colspan="4">
                             <button icon="gtk-cancel" special="cancel" string="Cancel" colspan="2"/>

@@ -18,14 +18,27 @@ class stampa_ordini(osv.osv_memory):
                 'adata': fields.date('A Data Documento', required=True),
                 'danrv': fields.char('Da Documento',size=30,required=True),
                 'anrv': fields.char('A Documento',size=30,required=True),
-          
+                'prezzi':fields.boolean('Stampo i prezzi e gli sconti sull''ordine?')
     }
     
     def _build_contexts(self, cr, uid, ids, data, context=None):
         if context is None:
             context = {}
         result = {}
-        result = {'danr':data['form']['danrv'],'anr':data['form']['anrv'],'dadata':data['form']['dadata'],'adata':data['form']['adata']}
+        result = {'danr':data['form']['danrv'],'anr':data['form']['anrv'],'dadata':data['form']['dadata'],'adata':data['form']['adata'], 'prezzi':data['form']['prezzi']}
+        
+        var = data['form']['prezzi']
+        #import pdb;pdb.set_trace()
+        if var == 1 and True:
+            result = {'danr':data['form']['danrv'],'anr':data['form']['anrv'],'dadata':data['form']['dadata'],
+                        'adata':data['form']['adata'], 'prezzi':1}
+        else:
+            if var == 0 and False:
+                result ={'danr':data['form']['danrv'],'anr':data['form']['anrv'],'dadata':data['form']['dadata'],
+                        'adata':data['form']['adata'], 'prezzi':0}
+
+        return result
+    
         return result
   
     def _print_report(self, cr, uid, ids, data, context=None):
@@ -51,7 +64,7 @@ class stampa_ordini(osv.osv_memory):
         data = {}
         data['ids'] = context.get('active_ids', [])
         data['model'] = context.get('active_model', 'ir.ui.menu')
-        data['form'] = self.read(cr, uid, ids, ['dadata',  'adata',  'danrv', 'anrv'])[0]
+        data['form'] = self.read(cr, uid, ids, ['dadata',  'adata',  'danrv', 'prezzi', 'anrv'])[0]
         used_context = self._build_contexts(cr, uid, ids, data, context=context)
         data['form']['parameters'] = used_context
         return self._print_report(cr, uid, ids, data, context=context)
